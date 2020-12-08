@@ -3,8 +3,12 @@
 In meta languge you are not boud to a specific realizations that may occur in your path.
 Meta language is a template language, it does not tell you how you should write code, and you has no real bounds in a way of writing portable and clear code.
 You potentially could express with your code exactly what you wanted to express, just pure logic.
+
 Realization of endline execution is no matter either, you can for example write different parts of your project with different programmers and different code styles, and then use these different modules that may vary much in their design: one part will be platform specific and C code extended, other be written purely on meta language and create just an interface, and third will be most slow but feature rich that be responsible for buisness logic. So you get most perfomance on bottlenecks and write simpler code on the top level of your project logic.
-Code translation is everything: you could write some library once and use it in different applications and platforms. You may still want to enchance optimization, but you do not need to complitely rewrite all the code, only parts of it.
+
+Code translation is everything: you could write some library once and use it in different applications and platforms. You may still want to enchance optimization, but you do not need to complitely rewrite all of the code, only parts of it.
+
+One of the main ideologies is a late bounding.
 
 Hello world:
 ```
@@ -27,7 +31,7 @@ func(number a)
 }
 ```
 That function just returns the same value plus 5.
-### New features
+### Return tuples
 ## Data types
 ### Iterators
 You can easily mark some iterable data with iterators.
