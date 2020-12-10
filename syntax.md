@@ -18,6 +18,47 @@ main()
     print("hello world!");
 }
 ```
+## Operators
+
+**Operational space:**
+
+There is local operational space that part of global operational space, local operational space is divided by left operational space and right operational space.
+
+```
+global space
+|(local space)   left space  =  rigt space   |
+```
+
+Some operations may create subspace, then current  local space will be global for them.
+
+
+**Syntax:**
+
+`//` - commentary untill end of the line
+
+`/* */` - multiline commentary
+
+`(...)` - subspace creation then execute with it's content
+
+
+
+Examples:
+```
+func(); // execute function
+```
+
+**Binary:**
+
+`=` - set equality. Set left operation space equal to rigth operation space, and then reurn left operaton space into global space
+
+Examples:
+```
+int b = int a = func(5);
+```
+
+
+
+
 ## Types
 ## Functions
 ### Basics
@@ -31,7 +72,43 @@ func(number a)
 }
 ```
 That function just returns the same value plus 5.
-### Return tuples
+### Return types
+You can not relay on static analysis and specify implicitly return type.
+```
+number : sum(number num1, number num2)
+{
+    return num1 + num2;
+}
+```
+### Multiple return
+You can return multiple variables as tuple and as named tuple.
+```
+number, number : retValue(number num1, number num2)
+{
+    return [num1,num2];
+}
+
+main()
+{
+    number num1, num2 = retValue(1,5);
+    print(num1,"\n"); // 1
+    print(num2,"\n"); // 5
+}
+```
+Named tuple
+```
+number num1, number num2 : retValue(number numArg1, number numArg2)
+{
+    return [num1 : numArg1,num2 : numArg2];
+}
+
+main()
+{
+    number number1 : num1, number number2 : num2 = retValue(1,5);
+    print(number1,"\n"); // 1
+    print(number2,"\n"); // 5
+} 
+```
 ## Data types
 ### Iterators
 You can easily mark some iterable data with iterators.
@@ -110,15 +187,35 @@ First of all, there is
 ```
 for i in [0;10] * 10
 {
-    print i;
+    print(i);
 }
 ```
 
-Print out 0, 10, 20, ... , 100 (with a default orientation).
+Will print out 0, 10, 20, ... , 100 (with a default orientation from 0 to 10).
 
 ```
-for i in 
+for i in [10;0]
+{
+    print(i);
+}
 ```
+```
+for i in [0;10].reverse()
+{
+    print(i);
+}
+```
+
+Example with poked element.
+
+```
+for i in [10!;0]
+{
+    print(i);
+}
+```
+
+Print 9, 8, 7, ... , 0
 
 
 **Limitations**
@@ -126,3 +223,10 @@ for i in
 TODO: think about this
 
 You can not use several times included parts of iterators, so be carefull. If you need some ranges of numbers included several times see _Unions_.
+## Integrated tests
+
+There is integrated test suit, static and runtime checks.
+
+```
+
+```
