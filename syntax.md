@@ -76,17 +76,117 @@ Some operations may create subspace, then current  local space will be global fo
 **Syntax:**
 
 `//` - commentary untill end of the line
+```
+// This is a commentary
+```
 
 `/* */` - multiline commentary
+```
+/*
+This is a multiline commentary
+*/
+```
 
 `(...)` - subspace creation then execute with it's content
 
-
-
-Examples:
 ```
 func(); // execute function
+call(mem[0xffffffff], @~.stdcall)(); // execute function at 0xffffffff as stdcall
 ```
+
+**Naming**
+
+There are basic and additional keywords. All names such as
+```
+for, while, if, ...
+```
+Are 1st rank keywords. You can not use them for naming. If you need to reference them use underscore before `_for`. Sometime you will need it, for exaple when you writing you own code generation patch.
+
+Additional or 2nd rank keywords are context-specific. For example in for it
+```
+@step, @iterator, @name
+```
+
+You can reference them with a special meta symbol.
+
+Meta characters lets you modify basic control flow of a program. There are basic conception on which every code has internal instructions, such as runtime _loops_, _control flow_, _variable modification_ and purely static operations for example _linkage_ and _preprocessor_ in C/C++
+
+**Name extension**
+
+In meta you can extend a name with `::` symbols
+This is usefull when when you need to pass a enum to a function that declared inside this function (1), or when you writing your own class that is used as enum (2).
+
+1)
+```
+shutdown(enum shutdownType)
+{
+    enum shutdownType
+    {
+        shutdown,
+        restart,
+        sleep
+    };
+}
+
+main()
+{
+    shutdown(shutdownType::sleep);
+}
+```
+
+2)
+
+```
+class Variable
+{
+    var data;
+    enum VariableType
+    {
+        integer,
+        string     
+    };
+    @nameExtension = VariableType;
+    ...
+}
+
+main()
+{
+    Variable a(10);
+    print(debugToStr(a)); // will print integer
+}
+```
+
+P.S. declaring an enum inside function isn't necessary to 
+
+**Repeat symbol**
+
+`~` - Lets you repeat nearest name
+
+```
+debug.logLevel = ~.::All;
+```
+
+is equivalent to
+
+```
+debug.logLevel = debug.logLevel::All;
+```
+
+**Meta characters**
+
+`@` - universal inner symbol. It can:
+
+1) When written before name consider _name_ a keyword.
+```
+for i = 0 to 10 @step = 2 // @step is a keyword
+    ...
+```
+2) When written inside subspace gives you control over it.
+```
+func()
+```
+
+`#` - universal static symbol
 
 **Multyrhreaded instructions**
 
