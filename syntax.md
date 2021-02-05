@@ -18,6 +18,47 @@ main()
     print("hello world!");
 }
 ```
+## Test
+
+Изменения переменных функциями
+
+Изменения копированием: множество a -> преобразуется в множество a', множество а забываем, множество a мы принимаем за a'
+
+
+Определим виртуальную машину на коротких инструкциях:
+```
+x = константа // присвоить а константе
+x = func(y) // присвоить x функцию от y
+delete x // забыть x
+```
+
+У нас получилось 3 операции для чистых функций:
+- 1) выделить память, присвоить константу
+- 2) выделить память, присвоить значение функции
+- 3) освободить память
+
+Тогда код
+
+```
+a = 1
+a = func(a)
+```
+
+Станет
+
+```
+a = значение 
+// существует а == значению
+a' = func(a)
+// существует а == значению, и a' == func(a)
+delete a
+// существует значение a' == func(a)
+a = a'
+// существует значение а == func(a0) и a' == func(a0)
+delete a'
+// существует значение а == func(a0)
+```
+
 ## Operators
 
 **Operational space:**
@@ -46,6 +87,38 @@ Examples:
 ```
 func(); // execute function
 ```
+
+**Multyrhreaded instructions**
+
+All instructions splitted by `;` considered **ordered**
+All instructions splitted by `,` considered **unordered**
+
+Example 
+
+Ordered code
+```
+int a = 0;
+int b = 10;
+a = a + 1;
+a = a + b;
+println(a); // 11
+```
+
+Unordered code
+```
+new arr[8] = {0,1,2,3,4,5,6,7};
+new n = 2;
+for i [0;arr.size] @step = 4
+{
+    arr[i] = arr[i] * n,
+    arr[i + 1] = arr[i] * n,
+    arr[i + 2] = arr[i] * n,
+    arr[i + 3] = arr[i] * n;
+}
+println(str(arr)); // will print `0 2 4 6 10 12 14`
+```
+
+This will result to multyple permutation instructions genereted and SSE optimization on compilation.
 
 **Binary:**
 
