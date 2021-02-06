@@ -109,7 +109,7 @@ Additional or 2nd rank keywords are context-specific. For example in for it
 
 You can reference them with a special meta symbol.
 
-Meta characters lets you modify basic control flow of a program. There are basic conception on which every code has internal instructions, such as runtime _loops_, _control flow_, _variable modification_ and purely static operations for example _linkage_ and _preprocessor_ in C/C++
+Meta characters lets you modify basic control flow of a program. There are basic conception on which every code has internal instructions, such as runtime _loops_, _control flow_, _variable modification_ and purely static operations for example _linkage_ and _preprocessor_ in C/C++, but they better integrated and more hi level.
 
 **Name extension**
 
