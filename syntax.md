@@ -114,11 +114,16 @@ Meta characters lets you modify basic control flow of a program. There are basic
 **Name extension**
 
 In meta you can extend a name with `::` symbols
+
+Extending name may leak some definition, but this is good for not specifing all the time enums and use them for extending functionality of function calling (even constructor, even constructor of a module)
+
 This is usefull when when you need to pass a enum to a function that declared inside this function (1), or when you writing your own class that is used as enum (2).
+
+Extending package refers to default package global scoping variables (3) 
 
 1)
 ```
-shutdown(enum shutdownType)
+shutdown(#@enum)
 {
     enum shutdownType
     {
@@ -126,11 +131,12 @@ shutdown(enum shutdownType)
         restart,
         sleep
     };
+    @#enum = shutdownType;
 }
 
 main()
 {
-    shutdown(shutdownType::sleep);
+    shutdown(::sleep);
 }
 ```
 
@@ -145,18 +151,46 @@ class Variable
         integer,
         string     
     };
-    @nameExtension = VariableType;
-    ...
+    VariableType type;
+    #@enum = VariableType;
+
+    init(#@param)
+    {
+        #  
+        if (type(@param) == int)
+        {
+            data = new int(@param);
+            type = ::int;
+        }
+        else if(type(@param) == string)
+        {
+            data = new string(@param);
+            type = ::string;
+        }
+        else
+        {
+            throw Exeption(::wrongParam, @param = @param);
+        }
+    }
+    
 }
 
 main()
 {
     Variable a(10);
-    print(debugToStr(a)); // will print integer
+    print(a.@enum); // will print integer
+    Variable b("10");
+
 }
 ```
 
 P.S. declaring an enum inside function isn't necessary to 
+
+3.
+
+```
+
+```
 
 **Repeat symbol**
 
