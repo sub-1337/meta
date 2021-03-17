@@ -18,6 +18,83 @@ main()
     print("hello world!");
 }
 ```
+
+
+## TODO
+
+1) Механизм "членов" в интерфейсах - определять не только функции, необходимые для реализации, но и помечать что для них должны быть _абстрактные_ данные.
+
+2) Стирание границы между наследованием и инкапсуляцией.
+
+Что-то типа такого:
+
+```
+           [Animal]
+           ||    ||
+         \/       \/
+  [(Mammal) Dog] [(NonMammal) Frog]
+```
+
+```
+interface Animal
+{
+    virtual printData() {};
+    var type;
+};
+
+class Mammal
+{
+    int legs = 4;
+    int temperature = 36.0;
+};
+
+class Dog : Animal
+{
+    @override printData = Mammal printData
+    {
+        println("Dog legs %d, temperature %f", data.legs, data.temperature);
+    };
+    @override type = Mammal data;
+};
+
+class NonMammal // Do not remember how this called
+{
+    int legs = 4;
+    bool hibernation = false;    
+}
+
+class Frog : Animal
+{
+    @override printData = NonMammal printData
+    {
+        println("Frog legs %d, hibernation %b", data.legs, data.hibernation);
+    };
+    @override type = NonMammal data;
+};
+
+int main()
+{
+    Dog sharik = new; // Syntax shugar, equal to new Dog
+    Frog alice = new;
+
+    Animal[] = [sharik, alice];
+
+    foreach(entity in Animal)
+    {
+        entity.printData();
+    }    
+}
+```
+
+Этот код выведет:
+```
+Dog legs 4, temperature 36.0
+Frog legs 4, hibernation false
+```
+
+Писать реализацию функционала в _базовом классе_, строить интерфейсы, которые допускают _отключение_ вызова функций и доступа к членам 
+
+
 ## Test
 
 Изменения переменных функциями
