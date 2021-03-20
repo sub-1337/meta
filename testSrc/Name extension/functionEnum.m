@@ -7,6 +7,8 @@ shutdown(#@enum)
         sleep
     };
     @@enum = shutdownType;
+
+    // (here goes actual code)
 }
 
 main()

@@ -8,7 +8,7 @@ Realization of endline execution is no matter either, you can for example write 
 
 Code translation is everything: you could write some library once and use it in different applications and platforms. You may still want to enchance optimization, but you do not need to complitely rewrite all of the code, only parts of it.
 
-One of the main ideologies is a late bounding.
+One of the main ideologies is a late bounding (may be not)
 
 Hello world:
 ```
