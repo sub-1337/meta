@@ -138,7 +138,7 @@ delete a'
 
 ## Operators
 
-**Operational space:**
+### Operational space
 
 There is local operational space that part of global operational space, local operational space is divided by left operational space and right operational space.
 
@@ -150,7 +150,7 @@ global space
 Some operations may create subspace, then current  local space will be global for them.
 
 
-**Syntax:**
+### Syntax
 
 `//` - commentary untill end of the line
 ```
@@ -164,6 +164,24 @@ This is a multiline commentary
 */
 ```
 
+`@` - dynamic space extension.
+
+```
+func()
+{
+@
+}
+```
+
+`#` - static space extension, everything that logically needs be foreseen before current operators otherwise it's behavior unpredictable.
+
+```
+func()
+{
+    #function.body = #assembly.x86{pop eax; pop cx; add cx;}; // not sure what it does
+}
+```
+
 `(...)` - subspace creation then execute with it's content
 
 ```
@@ -171,7 +189,9 @@ func(); // execute function
 call(mem[0xffffffff], @~.stdcall)(); // execute function at 0xffffffff as stdcall
 ```
 
-**Naming**
+
+
+### Naming
 
 There are basic and additional keywords. All names such as
 ```
@@ -188,7 +208,7 @@ You can reference them with a special meta symbol.
 
 Meta characters lets you modify basic control flow of a program. There are basic conception on which every code has internal instructions, such as runtime _loops_, _control flow_, _variable modification_ and purely static operations for example _linkage_ and _preprocessor_ in C/C++, but they better integrated and more hi level.
 
-**Name extension**
+### Name extension
 
 In meta you can extend a name with `::` symbols
 
