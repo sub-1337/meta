@@ -93,7 +93,26 @@ Frog legs 4, hibernation false
 ```
 
 Писать реализацию функционала в _базовом классе_, строить интерфейсы, которые допускают _отключение_ вызова функций и доступа к членам 
+## Test 0
 
+Циклы как функции
+
+```  
+fn func(count @iterator)
+{
+    pint ((int)A.iterator)
+} 
+for ({count i = 0 | i < 1 | i++},name='A',code=func) 
+
+```
+
+```   
+for ({count i = 0 | i < 1 | i++},name='A') 
+{
+    pint ((int)A.iterator)
+}
+```
+В данном случае у нас есть 
 
 ## Test
 
