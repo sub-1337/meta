@@ -21,6 +21,7 @@ main()
 
 
 ## TODO
+deciminal
 
 1) Механизм "членов" в интерфейсах - определять не только функции, необходимые для реализации, но и помечать что для них должны быть _абстрактные_ данные.
 
@@ -98,13 +99,24 @@ Frog legs 4, hibernation false
 Циклы как функции
 
 ```  
-fn func(count @iterator)
+fn func(@iterator A)
 {
     pint ((int)A.iterator)
 } 
-for ({count i = 0 | i < 1 | i++},name='A',code=func) 
+for ({count i = 0 | i < 1 | i++},code=func) 
 
 ```
+
+
+
+```   
+for ({count i = 0 | i < 1 | i++},name='A',code=func#goNext)
+fn func
+{
+    pint ((int)A.iterator)
+}
+```
+
 
 ```   
 for ({count i = 0 | i < 1 | i++},name='A') 
@@ -112,7 +124,8 @@ for ({count i = 0 | i < 1 | i++},name='A')
     pint ((int)A.iterator)
 }
 ```
-В данном случае у нас есть 
+
+
 
 ## Test
 
@@ -336,7 +349,24 @@ for i = 0 to 10 @step = 2 // @step is a keyword
 func()
 ```
 
+**Set equality**
+
 `#` - universal static symbol
+
+`=` inner set
+
+`:` static set
+
+`:=` auto set
+
+`let` lazy binding, set equality to the epression but later
+
+**Other**
+
+`swap` swap a variables
+
+`copy` low level copy operation
+
 
 **Multyrhreaded instructions**
 
@@ -408,7 +438,7 @@ You can return multiple variables as tuple and as named tuple.
 ```
 number, number : retValue(number num1, number num2)
 {
-    return [num1,num2];
+    return [num1,num2]#tuple;
 }
 
 main()
@@ -552,4 +582,50 @@ There is integrated test suit, static and runtime checks.
 
 ```
 
+
+
 ```
+## Keywords
+### Functions
+`fn` - function
+```
+fn func()
+{
+
+}
+```
+`#static` - as typical C function. Pre-defined types
+```
+fn int:func(int: a,int: b)#static
+{
+    return b + a;
+}
+
+func(1,4) // 5
+```
+`#dynamic` - dinamically enterpret body of a function.
+```
+fn func(a, b)#dynamic
+{
+    return b + a;
+}
+
+func(1,4) // 5
+func("a","b") // "ab"
+
+`#template` - template as in c++.
+```
+fn func(a, b)#template
+{
+    return b + a;
+}
+
+func(1,4) // error
+func(int:1,int:4) // 5
+func(str:"a",str:"b") // "ab"
+```
+
+
+`#auto` - find best match for a function from #static, #dynamic and #template (due to highest possible type guessing)
+
+## Functions
