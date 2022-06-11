@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.ipynb_checkpoints
+executor/out/build/
+.vs/
+.vs/
+.vscode/settings.json
+executor/out/build/
