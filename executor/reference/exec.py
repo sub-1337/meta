@@ -8,7 +8,7 @@ main()
 
 class Code:
     def __init__(self, code : str):
-        parsed = code.split("\n")
+        self.parsed = code.split("\n")
         
 class Parser:
     code = None

@@ -576,6 +576,45 @@ Print 9, 8, 7, ... , 0
 TODO: think about this
 
 You can not use several times included parts of iterators, so be carefull. If you need some ranges of numbers included several times see _Unions_.
+### variable types
+All the variables regarding of flawor they declared.
+There are 3 main types on handling type:
+
+1) Value
+2) Reference
+3) Atomic
+
+#### Value
+
+In case of value your variable will be overwritten when assign the value and copied when transfering in function. It copies object every time it's referenced.
+
+```
+val int a = 5; // a == 5
+a = 10;        // a == 10
+val int b = 15;// b == 15
+ref int c = 20;// c == 20
+a = b;         // a == 15
+a = c;         // a == 20 
+funct(a); // transfer value like in c++ (copying value)
+```
+
+Imagine assigment operator like that:
+```
+    val/ref int     a   =    5;
+//  flawor  type    name    anonimous object of atomic type
+```
+
+#### Reference
+
+
+#### Atomic
+`atomic` modifier that usually mean objects that creates in right part of `operational space` and work with any other directive (var/ref)
+Example:
+```
+atomic int a = 10;
+```
+2)
+
 ## Integrated tests
 
 There is integrated test suit, static and runtime checks.
