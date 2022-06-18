@@ -577,7 +577,7 @@ TODO: think about this
 
 You can not use several times included parts of iterators, so be carefull. If you need some ranges of numbers included several times see _Unions_.
 ### variable types
-All the variables regarding of flawor they declared.
+All the variables regard of flawor they declared.
 There are 3 main types on handling type:
 
 1) Value
@@ -595,6 +595,8 @@ val int b = 15;// b == 15
 ref int c = 20;// c == 20
 a = b;         // a == 15
 a = c;         // a == 20 
+// a == 10
+// b == 15
 funct(a); // transfer value like in c++ (copying value)
 ```
 
@@ -606,14 +608,50 @@ Imagine assigment operator like that:
 
 #### Reference
 
+```
+val a = 10;
+ref b = a;
+b += 5;
+// a == b == 10
+```
+
 
 #### Atomic
 `atomic` modifier that usually mean objects that creates in right part of `operational space` and work with any other directive (var/ref)
 Example:
 ```
-atomic int a = 10;
+int a = 10;
+int b = atomic(int, 10);
+atomic int c = 10;
+atomic int d = atomic(int, 10);
 ```
-2)
+#### Assing operator
+
+```
+a = 5;
+b ref.= a;
+c val.= a;
+```
+### Dynamic type (in static environment)
+
+Meta language support 2 main types of execution of a program. 
+One of them is static compilation, to bring convenience of dynamic 
+approach to static environment is dinamic type variable. 
+It cost a little more resources but can give you more cosy 
+
+```
+var a = SampleClass();    // Ok
+a = AnotherSampleClass(); // Ok
+int a = 5;             // Ok
+int b = SampleClass(); // Error
+a = SampleClass();     // Error
+```
+### Default value, double value
+It is possible to get a vriable double value. If it gets printed for example it will be default value if it's `null`, but it will be equal `null` on `isNull` check
+
+```
+var a = 
+```
 
 ## Integrated tests
 
