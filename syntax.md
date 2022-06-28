@@ -413,7 +413,6 @@ int b = int a = func(5);
 
 
 ## Types
-## Functions
 ### Basics
 Functions in meta language is much the same as in C and C++.
 By default you get _something_ that may be _called_ and do somechanges to a variables.
@@ -462,8 +461,8 @@ main()
     print(number2,"\n"); // 5
 } 
 ```
-## Data types
 ### Iterators
+
 You can easily mark some iterable data with iterators.
 There is a single access iterator `[N]` (regular) and `[N!]` (poked, like an point in math, it does not refers to any specific point but may be used to set ranges) and _range_ iterator such as:
 ```
@@ -577,15 +576,13 @@ TODO: think about this
 
 You can not use several times included parts of iterators, so be carefull. If you need some ranges of numbers included several times see _Unions_.
 ### variable types
-All the variables regard of flawor they declared.
-There are 3 main types on handling type:
+All the variables regard of flawor they declared. There are 3 main types on handling type:
 
-1) Value
-2) Reference
-3) Atomic
+1. Value
+2. Reference
+3. Atomic
 
 #### Value
-
 In case of value your variable will be overwritten when assign the value and copied when transfering in function. It copies object every time it's referenced.
 
 ```
@@ -605,20 +602,16 @@ Imagine assigment operator like that:
     val/ref int     a   =    5;
 //  flawor  type    name    anonimous object of atomic type
 ```
-
 #### Reference
-
 ```
 val a = 10;
 ref b = a;
 b += 5;
 // a == b == 10
 ```
-
-
 #### Atomic
-`atomic` modifier that usually mean objects that creates in right part of `operational space` and work with any other directive (var/ref)
-Example:
+atomic modifier that usually mean objects that creates in right part of operational space and work with any other directive (var/ref) Example:
+
 ```
 int a = 10;
 int b = atomic(int, 10);
@@ -626,19 +619,13 @@ atomic int c = 10;
 atomic int d = atomic(int, 10);
 ```
 #### Assing operator
-
 ```
 a = 5;
 b ref.= a;
 c val.= a;
 ```
 ### Dynamic type (in static environment)
-
-Meta language support 2 main types of execution of a program. 
-One of them is static compilation, to bring convenience of dynamic 
-approach to static environment is dinamic type variable. 
-It cost a little more resources but can give you more cosy 
-
+Meta language support 2 main types of execution of a program. One of them is static compilation, to bring convenience of dynamic approach to static environment is dinamic type variable. It cost a little more resources but can give you more cosy
 ```
 var a = SampleClass();    // Ok
 a = AnotherSampleClass(); // Ok
@@ -646,20 +633,25 @@ int a = 5;             // Ok
 int b = SampleClass(); // Error
 a = SampleClass();     // Error
 ```
+
 ### Default value, double value
-It is possible to get a vriable double value. If it gets printed for example it will be default value if it's `null`, but it will be equal `null` on `isNull` check
+It is possible to get a vriable double value. If it gets printed for example it will be default value if it's null, but it will be equal null on isNull check
+
+### F-strings
+There are python-like f strings
+Supported f-strings:
+1) Regular
+```
 
 ```
-var a = 
-```
-
+2) Html-escape
+3) SQL-escape
+4) User-defined escape pattern
 ## Integrated tests
 
 There is integrated test suit, static and runtime checks.
 
 ```
-
-
 
 ```
 ## Keywords
@@ -705,4 +697,5 @@ func(str:"a",str:"b") // "ab"
 
 `#auto` - find best match for a function from #static, #dynamic and #template (due to highest possible type guessing)
 
+## Functions
 ## Functions
