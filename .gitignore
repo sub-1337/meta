@@ -402,3 +402,8 @@ executor/out/build/
 .vs/
 .vscode/settings.json
 executor/out/build/
+
+# Build foldier
+out/
+.vscode/
+build
