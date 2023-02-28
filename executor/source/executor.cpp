@@ -21,18 +21,6 @@ namespace MetaCLR
 		call = 0x1000
 	};
 
-	//class StackData
-	//{
-	//public:
-	//	long int data;
-	//};
-
-	//class HeapData
-	//{
-	//public:
-
-	//};
-
 	class Data
 	{
 
@@ -40,6 +28,7 @@ namespace MetaCLR
 		int a;
 		int b;
 		int c;
+		std::string comment;
 		Data()
 		{
 			a = 0;
@@ -74,11 +63,13 @@ namespace MetaCLR
 			Command p_a;
 			p_a.commandType = enumCommand::alloc;
 			p_a.data.a = 1; // 1st var
+			p_a.data.comment = "1st instr";
 
 			Command p_a2;
 			p_a2.commandType = enumCommand::let;
 			p_a2.data.a = 1; // 1st var
 			p_a2.data.b = 2;
+			p_a2.data.comment = "2nd instr";
 
 			Command p_b;
 			p_b.commandType = enumCommand::alloc;
@@ -103,14 +94,15 @@ namespace MetaCLR
 			p_print.commandType = enumCommand::call;
 			p_print.data.a = 1; // function #1
 			p_print.data.b = 3; // third var
+			p_print.data.comment = "Print call";
 
-			Commands.push_front(p_a);
-			Commands.push_front(p_a2);
-			Commands.push_front(p_b);
-			Commands.push_front(p_b2);
-			Commands.push_front(p_c);
-			Commands.push_front(p_c2);
-			Commands.push_front(p_print);
+			Commands.push_back(p_a);
+			Commands.push_back(p_a2);
+			Commands.push_back(p_b);
+			Commands.push_back(p_b2);
+			Commands.push_back(p_c);
+			Commands.push_back(p_c2);
+			Commands.push_back(p_print);
 		}
 		Command NextCommand()
 		{
@@ -120,7 +112,7 @@ namespace MetaCLR
 		}
 		bool IsEmpty()
 		{
-			return (Commands.size() == true);
+			return (Commands.empty());
 		}
 		~Code()
 		{
@@ -168,7 +160,7 @@ namespace MetaCLR
 				switch (currCommand.data.a)
 				{
 				case 1:
-					std::cout << currCommand.data.b;
+					std::cout << memory[currCommand.data.b];
 				}
 			}
 		}
