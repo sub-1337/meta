@@ -160,7 +160,7 @@ namespace MetaCLR
 				switch (currCommand.data.a)
 				{
 				case 1:
-					std::cout << memory[currCommand.data.b];
+					std::cout << memory[currCommand.data.b] << std::endl;
 				}
 			}
 		}
@@ -193,6 +193,5 @@ int main()
 	exec.SetCode(code);
 
 	exec.Run();
-	std::cout << "Hello world" << std::endl;
 	return 0;
 }
