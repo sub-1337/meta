@@ -193,7 +193,7 @@ namespace MetaCLR
 int main()
 {	
 	MetaCLR::Code code;
-	std::string strCode = "a = 2; b = 3; c = a + b; print(c)";
+	std::string strCode = "a = 2; b = 3; c = a + b; print(c)"; // TODO: create parser
 	code.Compile(strCode);
 
 	MetaCLR::Executor exec;
