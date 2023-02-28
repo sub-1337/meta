@@ -131,30 +131,37 @@ namespace MetaCLR
 			{
 				memory.insert({ currCommand.data.a,0 });
 			}
+			else
 			if (currCommand.commandType == enumCommand::let)
 			{
 				memory[currCommand.data.a] = currCommand.data.b;
 			}
+			else
 			if (currCommand.commandType == enumCommand::math_plus)
 			{
 				memory[currCommand.data.a] = memory[currCommand.data.b] + memory[currCommand.data.c];
 			}
+			else
 			if (currCommand.commandType == enumCommand::math_minus)
 			{
 				memory[currCommand.data.a] = memory[currCommand.data.b] - memory[currCommand.data.c];
 			}
+			else
 			if (currCommand.commandType == enumCommand::math_mod)
 			{
 				memory[currCommand.data.a] = memory[currCommand.data.b] % memory[currCommand.data.c];
 			}
+			else
 			if (currCommand.commandType == enumCommand::math_mult)
 			{
 				memory[currCommand.data.a] = memory[currCommand.data.b] * memory[currCommand.data.c];
 			}
+			else
 			if (currCommand.commandType == enumCommand::math_divide)
 			{
 				memory[currCommand.data.a] = memory[currCommand.data.b] / memory[currCommand.data.c];
 			}
+			else
 			if (currCommand.commandType == enumCommand::call)
 			{
 				switch (currCommand.data.a)
