@@ -35,11 +35,9 @@ namespace MetaCLR
 			b = 0;
 			c = 0;
 		}
-		Data(int a, int b, int c) 
+		Data(int a, int b, int c) : a(a), b(b), c(c)
 		{
-			this->a = a;
-			this->b = b;
-			this->c = c;
+			
 		}
 		~Data()
 		{
