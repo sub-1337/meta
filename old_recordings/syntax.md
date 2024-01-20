@@ -107,8 +107,6 @@ for ({count i = 0 | i < 1 | i++},code=func)
 
 ```
 
-
-
 ```   
 for ({count i = 0 | i < 1 | i++},name='A',code=func#goNext)
 fn func
@@ -418,7 +416,7 @@ Functions in meta language is much the same as in C and C++.
 By default you get _something_ that may be _called_ and do somechanges to a variables.
 Basic function look:
 ```
-func(number a)
+func(number a) // 'num' type is an alias
 {
     return a + 5;
 }
