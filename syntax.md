@@ -101,7 +101,7 @@ Frog legs 4, hibernation false
 ```  
 fn func(@iterator A)
 {
-    pint ((int)A.iterator)
+    print ((int)A.iterator)
 } 
 for ({count i = 0 | i < 1 | i++},code=func) 
 
@@ -113,7 +113,7 @@ for ({count i = 0 | i < 1 | i++},code=func)
 for ({count i = 0 | i < 1 | i++},name='A',code=func#goNext)
 fn func
 {
-    pint ((int)A.iterator)
+    print ((int)A.iterator)
 }
 ```
 
@@ -121,7 +121,7 @@ fn func
 ```   
 for ({count i = 0 | i < 1 | i++},name='A') 
 {
-    pint ((int)A.iterator)
+    print ((int)A.iterator)
 }
 ```
 
