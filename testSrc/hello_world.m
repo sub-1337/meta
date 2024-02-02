@@ -8,5 +8,6 @@ func main()
 
 ////////////////////////////////////////////////
 //  import - hi level import of console type application
-//  use console.* - import into the current namespace all of console module fnctions
+//  use console.* - import into the current namespace
+//  all of console module fnctions
 ////////////////////////////////////////////////
