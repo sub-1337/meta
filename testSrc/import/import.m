@@ -4,11 +4,14 @@
 // Import module logically (with no direct instructions
 // how to do it 
 
-
 import ("console")
 import ("console", ::as = "con")
 
 // runtime only import (when interpretating)
+
+#import ("console", ::realod = true)
+
+// reload import
 
 #import_file("console.m")
 import_file("console.m")  // runtime
@@ -28,3 +31,4 @@ var table = {"out":"@@out_()"} // TODO: questioanable syntax
 import_lib::dynamic("user32.dll")
 
 // Dynamically import some .so or .dll file
+
