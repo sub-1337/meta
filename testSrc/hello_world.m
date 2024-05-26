@@ -3,7 +3,7 @@ use console.*
 
 func main()
 {
-    out << "Hello world!" << endl
+    print("Hello world!");
 }
 
 ////////////////////////////////////////////////
