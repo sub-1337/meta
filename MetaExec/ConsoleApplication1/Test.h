@@ -41,7 +41,7 @@ class TestBase
 public:	
 	~TestBase()
 	{
-		
+		freeAll();
 	};
 	void addTest(SingleTestBase* test)
 	{
@@ -110,5 +110,6 @@ public:
 				test = nullptr;
 			}
 		}
+		m_tests.clear();
 	}
 };
