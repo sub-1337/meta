@@ -1,12 +1,7 @@
 #pragma once
-#include <string>
-#include <vector>
-#include <iostream>
+#include "workingStd.h"
 
-using std::string;
-using std::vector;
-using std::cout;
-using std::endl;
+
 
 enum class EnumTestRes
 {
