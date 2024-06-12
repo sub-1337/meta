@@ -39,12 +39,11 @@ public:
 		vector<string> test = splitString("a;bb;ccc", ";");
 
 		if (std::equal(test.begin(), test.end(), testOrig.begin()))
-			return TestRes(EnumTestRes::ok, "splitString");
+			return TestRes(EnumTestRes::ok, "splitString1");
 		else
-			return TestRes(EnumTestRes::error, "splitString");
+			return TestRes(EnumTestRes::error, "splitString1");
 	};
 };
-
 class TestParser_utils_split2 : public SingleTestBase
 {
 public:
@@ -54,12 +53,11 @@ public:
 		vector<string> test = splitString("a;b;c", ";");
 
 		if (std::equal(test.begin(), test.end(), testOrig.begin()))
-			return TestRes(EnumTestRes::ok, "splitString");
+			return TestRes(EnumTestRes::ok, "splitString2");
 		else
-			return TestRes(EnumTestRes::error, "splitString");
+			return TestRes(EnumTestRes::error, "splitString2");
 	};
 };
-
 class TestParser_utils_split3 : public SingleTestBase
 {
 public:
@@ -69,12 +67,28 @@ public:
 		vector<string> test = splitString("a", ";");
 
 		if (std::equal(test.begin(), test.end(), testOrig.begin()))
-			return TestRes(EnumTestRes::ok, "splitString");
+			return TestRes(EnumTestRes::ok, "splitString3");
 		else
-			return TestRes(EnumTestRes::error, "splitString");
+			return TestRes(EnumTestRes::error, "splitString3");
 	};
 };
 
+class TestParser_utils_remSubstr : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		string check = "";
+
+		string output = remSubstr(orig);
+
+		if (output == check)
+			return TestRes(EnumTestRes::ok, "remSub");
+		else
+			return TestRes(EnumTestRes::error, "remSub");
+	};
+};
 
 class TestTests : public TestBase
 {
@@ -97,6 +111,7 @@ public:
 		addTest(new TestParser_utils_split());
 		addTest(new TestParser_utils_split2());
 		addTest(new TestParser_utils_split3());
+		addTest(new TestParser_utils_remSubstr());
 		addTest(new TestParser_misc());
 	}
 };

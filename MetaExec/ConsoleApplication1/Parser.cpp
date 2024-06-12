@@ -22,3 +22,8 @@ vector<string> splitString(const string& input, const string& str)
 
 	return  arr;
 }
+
+string remSubstr(const string& input)
+{
+	return "";
+}
