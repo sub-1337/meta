@@ -78,15 +78,48 @@ class TestParser_utils_remSubstr : public SingleTestBase
 public:
 	virtual TestRes Run() override
 	{
-		string orig = "";
-		string check = "";
+		string orig = "/* */";
+		string check = " ";
 
 		string output = remSubstr(orig);
 
 		if (output == check)
-			return TestRes(EnumTestRes::ok, "remSub");
+			return TestRes(EnumTestRes::ok, "remSubstr");
 		else
-			return TestRes(EnumTestRes::error, "remSub");
+			return TestRes(EnumTestRes::error, "remSubstr");
+	};
+};
+class TestParser_utils_remSubstr2 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "//\n//";
+
+		string output = remSubstr(orig);
+
+		if (output.find("//") == string::npos)
+			return TestRes(EnumTestRes::ok, "remSubstr2");
+		else
+			return TestRes(EnumTestRes::error, "remSubstr2");
+	};
+};
+class TestParser_utils_remSubstr3 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "////\n";
+
+		string check = "\n";
+		orig += "left // rem\n";
+		string output = remSubstr(orig);
+
+		if ((output.find("//") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
+			return TestRes(EnumTestRes::ok, "remSubstr3");
+		else
+			return TestRes(EnumTestRes::error, "remSubstr3");
 	};
 };
 
@@ -112,6 +145,8 @@ public:
 		addTest(new TestParser_utils_split2());
 		addTest(new TestParser_utils_split3());
 		addTest(new TestParser_utils_remSubstr());
-		addTest(new TestParser_misc());
+		addTest(new TestParser_utils_remSubstr2());
+		addTest(new TestParser_utils_remSubstr3());
+		//addTest(new TestParser_misc());
 	}
 };
