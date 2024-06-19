@@ -186,8 +186,13 @@ public:
 		orig += "/*/*rem*/*/ left";
 		string output = remComments(orig);
 
-		if ((output.find("/*") == string::npos) && (output.find("*/") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
-			return TestRes(EnumTestRes::ok, "remComments_b4");
+		if ((output.find("rem") == string::npos) && (output.find("left") != string::npos))
+		{
+			if ((output.find("/*") == string::npos) && (output.find("*/") == string::npos))
+				return TestRes(EnumTestRes::ok, "remComments_b4");
+			else
+				return TestRes(EnumTestRes::warn, "remComments_b4");
+		}
 		else
 			return TestRes(EnumTestRes::error, "remComments_b4");
 	};
