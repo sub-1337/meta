@@ -2,7 +2,7 @@
 #include "workingStd.h"
 
 vector<string> splitString(const string& input, const string& str);
-string remSubstr(const string& input);
+string remComments(const string& input);
 
 struct ASTLeaf
 {

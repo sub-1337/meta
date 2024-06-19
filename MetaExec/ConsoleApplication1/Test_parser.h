@@ -73,38 +73,22 @@ public:
 	};
 };
 
-class TestParser_utils_remSubstr : public SingleTestBase
-{
-public:
-	virtual TestRes Run() override
-	{
-		string orig = "/* */";
-		string check = " ";
-
-		string output = remSubstr(orig);
-
-		if (output == check)
-			return TestRes(EnumTestRes::ok, "remSubstr");
-		else
-			return TestRes(EnumTestRes::error, "remSubstr");
-	};
-};
-class TestParser_utils_remSubstr2 : public SingleTestBase
+class TestParser_utils_remComments2 : public SingleTestBase
 {
 public:
 	virtual TestRes Run() override
 	{
 		string orig = "//\n//";
 
-		string output = remSubstr(orig);
+		string output = remComments(orig);
 
 		if (output.find("//") == string::npos)
-			return TestRes(EnumTestRes::ok, "remSubstr2");
+			return TestRes(EnumTestRes::ok, "remComments2");
 		else
-			return TestRes(EnumTestRes::error, "remSubstr2");
+			return TestRes(EnumTestRes::error, "remComments2");
 	};
 };
-class TestParser_utils_remSubstr3 : public SingleTestBase
+class TestParser_utils_remComments3 : public SingleTestBase
 {
 public:
 	virtual TestRes Run() override
@@ -114,14 +98,101 @@ public:
 
 		string check = "\n";
 		orig += "left // rem\n";
-		string output = remSubstr(orig);
+		string output = remComments(orig);
 
 		if ((output.find("//") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
-			return TestRes(EnumTestRes::ok, "remSubstr3");
+			return TestRes(EnumTestRes::ok, "remComments3");
 		else
-			return TestRes(EnumTestRes::error, "remSubstr3");
+			return TestRes(EnumTestRes::error, "remComments3");
 	};
 };
+class TestParser_utils_remComments4 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "////\n";
+
+		string check = "\n";
+		orig += "left // rem\n";
+
+		orig += "left // rem\n";
+		string output = remComments(orig);
+
+		if ((output.find("//") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
+			return TestRes(EnumTestRes::ok, "remComments4");
+		else
+			return TestRes(EnumTestRes::error, "remComments4");
+	};
+};
+class TestParser_utils_remComments_b1 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "/*";
+		orig += "rem";
+		orig += "*/\n";
+		string output = remComments(orig);
+
+		if ((output.find("/*") == string::npos) && (output.find("rem") == string::npos))
+			return TestRes(EnumTestRes::ok, "remComments_b1");
+		else
+			return TestRes(EnumTestRes::error, "remComments_b1");
+	};
+};
+class TestParser_utils_remComments_b2 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "/*";
+		orig += "rem";
+		orig += "*/ left\n";
+		string output = remComments(orig);
+
+		if ((output.find("/*") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
+			return TestRes(EnumTestRes::ok, "remComments_b2");
+		else
+			return TestRes(EnumTestRes::error, "remComments_b2");
+	};
+};
+class TestParser_utils_remComments_b3 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "/**/";
+		orig += "left";
+		orig += "/*rem*/\n";
+		string output = remComments(orig);
+
+		if ((output.find("/*") == string::npos) && (output.find("*/")) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
+			return TestRes(EnumTestRes::ok, "remComments_b3");
+		else
+			return TestRes(EnumTestRes::error, "remComments_b3");
+	};
+};
+class TestParser_utils_remComments_b4 : public SingleTestBase
+{
+public:
+	virtual TestRes Run() override
+	{
+		string orig = "";
+		orig += "/*/*rem*/*/ left";
+		string output = remComments(orig);
+
+		if ((output.find("/*") == string::npos) && (output.find("*/") == string::npos) && (output.find("rem") == string::npos) && (output.find("left") != string::npos))
+			return TestRes(EnumTestRes::ok, "remComments_b4");
+		else
+			return TestRes(EnumTestRes::error, "remComments_b4");
+	};
+};
+
 
 class TestTests : public TestBase
 {
@@ -144,9 +215,13 @@ public:
 		addTest(new TestParser_utils_split());
 		addTest(new TestParser_utils_split2());
 		addTest(new TestParser_utils_split3());
-		addTest(new TestParser_utils_remSubstr());
-		addTest(new TestParser_utils_remSubstr2());
-		addTest(new TestParser_utils_remSubstr3());
-		//addTest(new TestParser_misc());
+		addTest(new TestParser_utils_remComments2());
+		addTest(new TestParser_utils_remComments3());
+		addTest(new TestParser_utils_remComments4());
+		
+		addTest(new TestParser_utils_remComments_b1());
+		addTest(new TestParser_utils_remComments_b2());
+		addTest(new TestParser_utils_remComments_b3());
+		addTest(new TestParser_utils_remComments_b4());
 	}
 };
