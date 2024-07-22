@@ -12,6 +12,23 @@ class keywords(Enum):
     const = "const"
     semicolon = ";"
     dollar = "$"
+    pointer = "ptr"
+    class brackets(Enum):
+        squareOpen = "["
+        squreClose = "]"
+        roundOpen = "("
+        roundClose = ")"
+        trinagleOpen = "<"
+        trinagleClose = ">"
+        commentOpen = "/*"
+        commentClose = "*/"
+    class compare(Enum):
+        equal = "=="
+        notEqual = "!="
+        greater = ">"
+        lower = "<"
+        greaterOrEq = ">="
+        lowerOrEq = "<="
     # example table.keywords.math_keywords.value.mod
     class math_keywords(Enum):
         plus = "+"
@@ -24,7 +41,7 @@ class keywords(Enum):
         string = "string"
         int = "int"
         real = "real"
-        pointer = "ptr"
+        
 
 
     
