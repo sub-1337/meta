@@ -1,6 +1,8 @@
 import table
 
 class Parser():
+    tokenMap = None
+    maxTokenSz = 6
     def getReady(self):
         tokens = {}
         for keywordCathegories in table.keywords:
@@ -14,9 +16,22 @@ class Parser():
                         oldval = tokens[keyword.value]
                         tokens[keyword.value] = [oldval, keyword.name]
                 print(keyword.name)
-        #print(tokens)
+        self.tokenMap = tokens
 
-    def parse(self, text):
+    def parse(self, text):        
         textLines = text.splitlines()
-        for symbol 
-        pass
+        tokenized = []
+        for line in textLines:
+            symCount = 0
+            tmpString = ""
+            for symbol in line:
+                tmpString += symbol
+                symCount += 1                
+                if symCount > self.maxTokenSz:
+
+                if tmpString in self.tokenMap:
+                    tokenized.append(self.tokenMap[tmpString])
+                if symbol == " ":
+                    tokenized.append(self.tokenMap["name"])
+                    tmpString = ""
+                    symCount = 0

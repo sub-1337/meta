@@ -5,6 +5,8 @@ from enum import Enum
 
 class keywords(Enum):
     class common(Enum):
+        name = ""
+        space = " "
         var = "var"        
         function = "fn"
         new = "new"
