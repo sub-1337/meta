@@ -126,6 +126,7 @@ public:
 			return TestRes(EnumTestRes::error, "remComments4");
 	};
 };
+
 class TestParser_utils_remComments_b1 : public SingleTestBase
 {
 public:
@@ -199,6 +200,7 @@ public:
 };
 
 
+
 class TestTests : public TestBase
 {
 public:
@@ -220,6 +222,7 @@ public:
 		addTest(new TestParser_utils_split());
 		addTest(new TestParser_utils_split2());
 		addTest(new TestParser_utils_split3());
+
 		addTest(new TestParser_utils_remComments2());
 		addTest(new TestParser_utils_remComments3());
 		addTest(new TestParser_utils_remComments4());

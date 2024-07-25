@@ -53,7 +53,7 @@ string remComments_line(const string& input)
 
 	return result;
 }
-string remComments_multyLine(string input)
+string remComments_multyLine(const string& input)
 {
 	//string result;
 	//string startComment = "/*";
