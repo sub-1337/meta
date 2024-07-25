@@ -3,6 +3,7 @@ import table
 class Parser():
     tokenMap = None
     maxTokenSz = 6
+    tokenized = []
     def getReady(self):
         tokens = {}
         for keywordCathegories in table.keywords:
@@ -20,7 +21,7 @@ class Parser():
 
     def parse(self, text):        
         textLines = text.splitlines()
-        tokenized = []
+        self.tokenized = []
         for line in textLines:
             symCount = 0
             tmpString = ""
@@ -28,10 +29,11 @@ class Parser():
                 tmpString += symbol
                 symCount += 1                
                 if symCount > self.maxTokenSz:
-
+                    next
                 if tmpString in self.tokenMap:
-                    tokenized.append(self.tokenMap[tmpString])
-                if symbol == " ":
-                    tokenized.append(self.tokenMap["name"])
+                    self.tokenized.append(self.tokenMap[tmpString])
+                if symbol == (" " or "\n"):
+                    self.tokenized.append(table.keywords.common.name)
+                    self.tokenized.append(tmpString)
                     tmpString = ""
                     symCount = 0
