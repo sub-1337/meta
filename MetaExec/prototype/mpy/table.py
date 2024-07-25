@@ -4,15 +4,16 @@ from enum import Enum
 
 
 class keywords(Enum):
-    var = "var"
-    function = "fn"
-    new = "new"
-    auto = "auto"
-    comment = "//"
-    const = "const"
-    semicolon = ";"
-    dollar = "$"
-    pointer = "ptr"
+    class common(Enum):
+        var = "var"
+        function = "fn"
+        new = "new"
+        auto = "auto"
+        comment = "//"
+        const = "const"
+        semicolon = ";"
+        dollar = "$"
+        pointer = "ptr"
     class brackets(Enum):
         squareOpen = "["
         squreClose = "]"
