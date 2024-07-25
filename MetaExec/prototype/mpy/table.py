@@ -5,7 +5,7 @@ from enum import Enum
 
 class keywords(Enum):
     class common(Enum):
-        var = "var"
+        var = "var"        
         function = "fn"
         new = "new"
         auto = "auto"
@@ -14,6 +14,7 @@ class keywords(Enum):
         semicolon = ";"
         dollar = "$"
         pointer = "ptr"
+        _import = "import"
     class brackets(Enum):
         squareOpen = "["
         squreClose = "]"
