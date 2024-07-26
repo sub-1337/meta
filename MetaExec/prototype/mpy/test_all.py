@@ -7,6 +7,6 @@ import compile
 parser = compile.Parser()
 parser.getReady()
 import os.path as path
-file = open(path.join( "testSrc", "hello_world.m"))
+file = open(path.join( "testSrc", "hello.m"))
 parser.parse(file.read())
 print()

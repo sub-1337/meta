@@ -1,6 +1,4 @@
-import console
-
-func main()
+fn test()
 {
 
 }
