@@ -1,13 +1,13 @@
 import table
-from table import isSapceEnum, isSpaceStr, isBracket
+from table import isSapceEnum, isSpaceStr, isBracket, retEnumBracket
 
 
 class Parser():
-    tokenMap = None
-    maxTokenSz = 6
+    #tokenMap = None
+    #maxTokenSz = 6
     tokenized = []
-    prep_tokenized = []
-    def getReady(self):
+    origText = ""
+    """def getReady(self):
         tokens = {}
         for keywordCathegories in table.keywords:
             for keyword in keywordCathegories.value:
@@ -20,29 +20,46 @@ class Parser():
                         oldval = tokens[keyword.value]
                         tokens[keyword.value] = [oldval, keyword.name]
                 #print(keyword.name)
-        self.tokenMap = tokens
-
-    def parse(self, text):  
-        textLines = text.splitlines()
+        self.tokenMap = tokens"""
+    def Parse(self, text):
+        self.origText = text
+        self.parse_basic()
+        self.parse_norm_spaces()
+    # Roughly parse
+    def parse_basic(self):
+        textLines = self.origText.splitlines()
         self.tokenized = []
-        self.prep_tokenized.clear()
+        self.tokenized.clear()
         for line in textLines:
             for i, symbol in enumerate(line):
                 if isSpaceStr(symbol):
-                    if len(self.prep_tokenized) != 0:
-                        if isSapceEnum(self.prep_tokenized[-1]):
-                           self.prep_tokenized.append(table.keywords.common.value.space)
-                    else:
-                        self.prep_tokenized.append(table.keywords.common.value.space)
+                    self.tokenized.append(table.keywords.common.value.space)
                 elif isBracket(symbol):
-                    print(symbol)
+                    self.tokenized.append(retEnumBracket(symbol))
+        print("---parse_basic---")
+        print(self.tokenized)
+    # Delete excessive white spaces
+    def parse_norm_spaces(self):
+        prev = table.keywords.common.value.none
+        prevTokens = self.tokenized
+        newTokens = []
+        for token in prevTokens:
+            if prev == token and isSapceEnum(token):
+                next
+            else:
+                newTokens.append(token)
+            prev = token
+        self.tokenized = newTokens
+        print("---parse_norm---")
+        print(self.tokenized)
+
+            
 
 def test():
     parser = Parser()
-    parser.getReady()
     import os.path as path
     file = open(path.join( "testSrc", "hello.m"))
-    parser.parse(file.read())
+    parser.Parse(file.read())
     print()
 if __name__ == "__main__":
     test()

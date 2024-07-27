@@ -6,9 +6,15 @@ def isSpaceStr(str):
     return  str == keywords.common.value.space.value  
 def isBracket(str):
     return str in keywords.brackets.value
+def retEnumBracket(str):
+    for elem in keywords.brackets.value:
+        if elem.value == str:
+            return elem
+    return None
 
 class keywords(Enum):    
     class common(Enum):
+        none = None
         name = ""
         space = " "
         var = "var"        
