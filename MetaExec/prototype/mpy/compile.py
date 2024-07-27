@@ -1,26 +1,10 @@
 import table
-from table import isSapceEnum, isSpaceStr, isBracket, retEnumBracket
+from table import isSapceEnum, isSpaceStr, isBracketStr, retEnumBracket
 
 
 class Parser():
-    #tokenMap = None
-    #maxTokenSz = 6
     tokenized = []
     origText = ""
-    """def getReady(self):
-        tokens = {}
-        for keywordCathegories in table.keywords:
-            for keyword in keywordCathegories.value:
-                if not keyword in tokens:
-                    tokens[keyword.value] = keyword
-                else:
-                    if type(tokens[keyword.value]) == type([]):
-                         tokens[keyword.value].append(keyword.name)
-                    else:
-                        oldval = tokens[keyword.value]
-                        tokens[keyword.value] = [oldval, keyword.name]
-                #print(keyword.name)
-        self.tokenMap = tokens"""
     def Parse(self, text):
         self.origText = text
         self.parse_basic()
@@ -34,7 +18,7 @@ class Parser():
             for i, symbol in enumerate(line):
                 if isSpaceStr(symbol):
                     self.tokenized.append(table.keywords.common.value.space)
-                elif isBracket(symbol):
+                elif isBracketStr(symbol):
                     self.tokenized.append(retEnumBracket(symbol))
         print("---parse_basic---")
         print(self.tokenized)

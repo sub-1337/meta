@@ -1,5 +1,4 @@
-   
-fn test( )
+fn test()
 {
- 
+    
 }
