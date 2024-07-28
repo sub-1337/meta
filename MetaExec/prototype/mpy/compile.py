@@ -1,10 +1,11 @@
 import table
-from table import isSapceEnum, isSpaceStr, isBracketStr, retEnumBracket
+from table import retCommonName, isSapceEnum, isSpaceStr, isBracketStr, retEnumBracket, isQuotes, retEnumQuotes, retEnumSpace
 
 
 class Parser():
     tokenized = []
     origText = ""
+    errorList = []
     def Parse(self, text):
         self.origText = text
         self.parse_basic()
@@ -14,12 +15,20 @@ class Parser():
         textLines = self.origText.splitlines()
         self.tokenized = []
         self.tokenized.clear()
+        quotes = False
         for line in textLines:
-            for i, symbol in enumerate(line):
+            for i, symbol in enumerate(line):              
+                    
                 if isSpaceStr(symbol):
-                    self.tokenized.append(table.keywords.common.value.space)
+                    self.tokenized.append(retEnumSpace())
                 elif isBracketStr(symbol):
-                    self.tokenized.append(retEnumBracket(symbol))
+                    if isQuotes(symbol):
+                        quotes =  not quotes
+                        self.tokenized.append(retEnumQuotes())
+                    else:
+                        self.tokenized.append(retEnumBracket(symbol))
+                else:
+                    self.tokenized.append(retCommonName(symbol, quotes))
         print("---parse_basic---")
         print(self.tokenized)
     # Delete excessive white spaces
