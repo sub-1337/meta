@@ -1,6 +1,6 @@
 from enum import Enum
-def retCommonName(str, isEscape):
-    return name(str, isEscape)
+def retCommonName(nameObj, isEscape):
+    return name(nameObj, isEscape)
 def retEnumSpace():
     return keywords.common.value.space
 def isSapceEnum(obj):
@@ -24,12 +24,26 @@ def retEnumBracket(str):
 
 class name:    
     name = ""
+    key = None
     isEscape = False
     def __init__(self, name, isEscape) -> None:
-        self.name = name
+        if type(name) == type(""):
+            self.name = name
+        elif type(name) == type(Enum):
+            key = name
         self.isEscape = isEscape
+    def retStr(self):
+        if self.key != None:
+            return self.key.value
+        elif name != "":
+            return self.name
     def __repr__(self) -> str:
-        return "Name \'" + str(self.name) + "\' esc \'" + str(self.isEscape) + "\'"
+        name = ""
+        if self.key != None:
+            name += str(key)
+        else:
+            name += str(self.name)
+        return "Name \'" + name + "\' esc \'" + str(self.isEscape) + "\'"
 
 class keywords(Enum):    
     class common(Enum):

@@ -17,14 +17,13 @@ class Parser():
         self.tokenized.clear()
         quotes = False
         for line in textLines:
-            for i, symbol in enumerate(line):              
-                    
+            for i, symbol in enumerate(line):          
                 if isSpaceStr(symbol):
                     self.tokenized.append(retEnumSpace())
                 elif isBracketStr(symbol):
                     if isQuotes(symbol):
                         quotes =  not quotes
-                        self.tokenized.append(retEnumQuotes())
+                        self.tokenized.append(retCommonName(retEnumQuotes(), quotes))
                     else:
                         self.tokenized.append(retEnumBracket(symbol))
                 else:
