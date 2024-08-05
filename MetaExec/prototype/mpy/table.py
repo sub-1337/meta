@@ -12,8 +12,14 @@ def isBracketStr(str):
         if (el.value == str):
             return True
     return False
-def isQuotes(str):
-    return str == keywords.brackets.value.quotes.value
+def isQuotes(token):
+    if (isinstance(token, str)):
+        if (token == keywords.brackets.value.quotes.value):
+            return True
+        else:
+            return False
+    return token.key == keywords.brackets.value.quotes or \
+    token.rawSymbol == keywords.brackets.value.quotes.value
 def retEnumQuotes():
     return keywords.brackets.value.quotes
 def retEnumBracket(str):
@@ -46,10 +52,6 @@ def isBracketStr(str):
         if (el.value == str):
             return True
     return False
-def isQuotes(str):
-    return str == keywords.brackets.value.quotes.value
-def retEnumQuotes():
-    return keywords.brackets.value.quotes
 def retEnumBracket(str):
     for elem in keywords.brackets.value:
         if elem.value == str:
@@ -60,11 +62,17 @@ class token:
     rawSymbol = ""
     key = None
     isEscape = False
-    def __init__(self, rawSymbol, isEscape = False) -> None:
+    def __init__(self, rawSymbol, isEscape = None) -> None:
         if isinstance(rawSymbol, str):
             self.rawSymbol = rawSymbol
         elif isinstance(rawSymbol, Enum):
             self.key = rawSymbol
+        elif isinstance(rawSymbol, token):
+            self.key = rawSymbol.key
+            self.rawSymbol = rawSymbol.rawSymbol
+            if isEscape == None:
+                self.isEscape =  rawSymbol.isEscape
+                return
         self.isEscape = isEscape
     def retStr(self):
         if self.key != None:
