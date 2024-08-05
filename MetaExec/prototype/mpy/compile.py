@@ -22,8 +22,6 @@ class Parser():
             for i, symbol in enumerate(line):          
                 newTokens.append(retCommonToken(symbol, False))
         self.tokenized = newTokens
-        print("---parse_basic---")
-        print(self.tokenized)
     # parse single symbol if possible
     def parse_one_symbols(self):
         prevTokens = self.tokenized
@@ -37,16 +35,18 @@ class Parser():
         quotes = False
         prevTokens = self.tokenized
         newTokens = []
-        for i, token in enumerate(prevTokens):            
+        for i, token in enumerate(prevTokens):                     
             newTokens.append(retCommonToken(token, quotes))
             if isQuotes(token):
-                quotes =  not quotes
+                quotes =  not quotes   
         prevTokens = newTokens
         newTokens = []
-        for i, token in enumerate(prevTokens):           
+        # Algorythm to escape only inner string of ""
+        for i, token in enumerate(prevTokens): 
             if isQuotes(token):
-                quotes =  not quotes 
-            newTokens.append(retCommonToken(token, quotes))            
+                quotes =  not quotes   
+            resQutes = token.isEscape
+            newTokens.append(retCommonToken(token, quotes and resQutes))            
         self.tokenized = newTokens
 
     # Delete excessive white spaces
