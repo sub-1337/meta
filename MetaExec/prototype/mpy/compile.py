@@ -37,10 +37,16 @@ class Parser():
         quotes = False
         prevTokens = self.tokenized
         newTokens = []
-        for i, token in enumerate(prevTokens):
+        for i, token in enumerate(prevTokens):            
+            newTokens.append(retCommonToken(token, quotes))
             if isQuotes(token):
                 quotes =  not quotes
-            newTokens.append(retCommonToken(token, quotes))
+        prevTokens = newTokens
+        newTokens = []
+        for i, token in enumerate(prevTokens):           
+            if isQuotes(token):
+                quotes =  not quotes 
+            newTokens.append(retCommonToken(token, quotes))            
         self.tokenized = newTokens
 
     # Delete excessive white spaces
