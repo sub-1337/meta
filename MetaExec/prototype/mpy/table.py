@@ -1,6 +1,6 @@
 from enum import Enum
 def retCommonName(nameObj, isEscape):
-    return name(nameObj, isEscape)
+    return token(nameObj, isEscape)
 def retEnumSpace():
     return keywords.common.value.space
 def isSapceEnum(obj):
@@ -22,17 +22,16 @@ def retEnumBracket(str):
             return elem
     return None
 
-<<<<<<< HEAD
-def retTokenAuto(str):
+def retTokenAuto(token):
     ret = None
-    if isSpaceStr(str):
+    if isSpaceStr(token.rawSymbol):
         ret = retEnumSpace()
-    elif isBracketStr(str):
-        ret = retEnumBracket(str)
-    elif isQuotes(str):
+    elif isBracketStr(token.rawSymbol):
+        ret = retEnumBracket(token.rawSymbol)
+    elif isQuotes(token.rawSymbol):
         ret = retEnumQuotes()
     else:
-        ret = str
+        ret = token.rawSymbol
     return retCommonToken(ret)
 def retCommonToken(nameObj, isEscape = False):
     return token(nameObj, isEscape)
@@ -61,11 +60,11 @@ class token:
     rawSymbol = ""
     key = None
     isEscape = False
-    def __init__(self, rawSymbol, isEscape) -> None:
-        if type(rawSymbol) == type(""):
+    def __init__(self, rawSymbol, isEscape = False) -> None:
+        if isinstance(rawSymbol, str):
             self.rawSymbol = rawSymbol
-        elif type(rawSymbol) == type(Enum):
-            key = rawSymbol
+        elif isinstance(rawSymbol, Enum):
+            self.key = rawSymbol
         self.isEscape = isEscape
     def retStr(self):
         if self.key != None:
@@ -77,36 +76,12 @@ class token:
     def __repr__(self) -> str:
         rawSymbol = ""
         if self.key != None:
-            rawSymbol += str(key)
+            rawSymbol += str(self.key)
         else:
             rawSymbol += str(self.rawSymbol)
         return "rawSymbol \'" + rawSymbol + "\' esc \'" + str(self.isEscape) + "\'"
 
-=======
-class name:    
-    name = ""
-    key = None
-    isEscape = False
-    def __init__(self, name, isEscape) -> None:
-        if type(name) == type(""):
-            self.name = name
-        elif type(name) == type(Enum):
-            key = name
-        self.isEscape = isEscape
-    def retStr(self):
-        if self.key != None:
-            return self.key.value
-        elif name != "":
-            return self.name
-    def __repr__(self) -> str:
-        name = ""
-        if self.key != None:
-            name += str(key)
-        else:
-            name += str(self.name)
-        return "Name \'" + name + "\' esc \'" + str(self.isEscape) + "\'"
 
->>>>>>> d4d52f0793ce06010024b8c5bd374c710a06d4d7
 class keywords(Enum):    
     class common(Enum):
         none = None
