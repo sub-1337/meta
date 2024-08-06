@@ -62,8 +62,6 @@ class Parser():
                 newTokens.append(token)
 
         self.tokenized = newTokens
-        print("---parse_norm---")
-        print(self.tokenized)
 
             
 
