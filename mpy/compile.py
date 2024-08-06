@@ -1,4 +1,4 @@
-from table import isEscape, isSpace, retTokenAuto, retCommonToken, isQuotes
+from table import isEscape, isSpace, retTokenAuto, retCommonToken, isQuotes, isTab, retSpace
 
 class Parser():
     tokenized = []
@@ -9,6 +9,7 @@ class Parser():
         self.parse_basic()
         self.parse_one_symbols()
         self.parse_quotes()
+        self.parse_swap_tabs()
         self.parse_norm_spaces()
     # Create basic tokens
     def parse_basic(self):
@@ -46,7 +47,19 @@ class Parser():
             resQutes = token.isEscape
             newTokens.append(retCommonToken(token, quotes and resQutes))            
         self.tokenized = newTokens
-
+    # Swap tabs with spaces
+    def parse_swap_tabs(self):
+        prevTokens = self.tokenized
+        newTokens = []
+        for token in prevTokens:
+            if isTab(token):
+                if not isEscape(token):
+                    newTokens.append(retSpace())
+                else:
+                    newTokens.append(token)
+            else:
+                newTokens.append(token)
+        self.tokenized = newTokens
     # Delete excessive white spaces
     def parse_norm_spaces(self):
         prevSpace = False
@@ -60,7 +73,6 @@ class Parser():
             else:
                 prevSpace = False
                 newTokens.append(token)
-
         self.tokenized = newTokens
 
             
@@ -70,7 +82,7 @@ def test():
     import os.path as path
     file = open(path.join( "testSrc", "hello.m"))
     parser.Parse(file.read())
-    print()
+    print(parser.tokenized)
 if __name__ == "__main__":
     test()
 

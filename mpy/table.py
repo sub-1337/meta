@@ -3,8 +3,13 @@ def retCommonName(nameObj, isEscape):
     return token(nameObj, isEscape)
 def retEnumSpace():
     return keywords.common.value.space
+def retEnumTab():
+    return keywords.common.value.tab
 def isSapceEnum(obj):
     return obj == keywords.common.value.space
+def isTab(token):
+    return token.rawSymbol == keywords.common.value.tab.value or\
+                token.key == keywords.common.value.tab
 def isSpaceStr(str):
     return  str == keywords.common.value.space.value  
 def isBracketStr(str):
@@ -37,6 +42,8 @@ def retTokenAuto(token):
         ret = retEnumBracket(token.rawSymbol)
     elif isQuotes(token.rawSymbol):
         ret = retEnumQuotes()
+    elif isTab(token):
+        ret = retEnumTab()
     else:
         ret = token.rawSymbol
     return retCommonToken(ret)
@@ -60,7 +67,8 @@ def retEnumBracket(str):
     return None
 def isSpace(token):
     return isSapceEnum(token.key) or isSpaceStr(token.rawSymbol)
-
+def retSpace():
+    return retCommonToken(retEnumSpace())
 class token:    
     rawSymbol = ""
     key = None
@@ -97,6 +105,7 @@ class keywords(Enum):
     class common(Enum):
         none = None
         name = ""
+        tab = "\t"
         space = " "
         var = "var"        
         function = "fn"
