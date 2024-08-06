@@ -1,6 +1,4 @@
-import table
-from table import retTokenAuto, retCommonToken, isSapceEnum, isSpaceStr, isBracketStr, retEnumBracket, isQuotes, retEnumQuotes, retEnumSpace
-
+from table import isEscape, isSpace, retTokenAuto, retCommonToken, isQuotes
 
 class Parser():
     tokenized = []
@@ -41,7 +39,7 @@ class Parser():
                 quotes =  not quotes   
         prevTokens = newTokens
         newTokens = []
-        # Algorythm to escape only inner string of ""
+        # Algorythm to escape only inner string of " "
         for i, token in enumerate(prevTokens): 
             if isQuotes(token):
                 quotes =  not quotes   
@@ -51,15 +49,18 @@ class Parser():
 
     # Delete excessive white spaces
     def parse_norm_spaces(self):
-        prev = table.keywords.common.value.none
+        prevSpace = False
         prevTokens = self.tokenized
         newTokens = []
         for token in prevTokens:
-            if prev == token.key and isSapceEnum(token):
-                next
+            if isSpace(token) and not isEscape(token):
+                if not prevSpace:
+                    newTokens.append(token)
+                prevSpace = True
             else:
+                prevSpace = False
                 newTokens.append(token)
-            prev = token
+
         self.tokenized = newTokens
         print("---parse_norm---")
         print(self.tokenized)

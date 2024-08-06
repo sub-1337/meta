@@ -27,7 +27,8 @@ def retEnumBracket(str):
         if elem.value == str:
             return elem
     return None
-
+def isEscape(token):
+    return token.isEscape
 def retTokenAuto(token):
     ret = None
     if isSpaceStr(token.rawSymbol):
@@ -57,6 +58,8 @@ def retEnumBracket(str):
         if elem.value == str:
             return elem
     return None
+def isSpace(token):
+    return isSapceEnum(token.key) or isSpaceStr(token.rawSymbol)
 
 class token:    
     rawSymbol = ""
