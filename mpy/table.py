@@ -34,7 +34,7 @@ def retEnumBracket(str):
     return None
 def isEscape(token):
     return token.isEscape
-def retTokenAuto(token):
+def retTokenAuto(token, isEscape):
     ret = None
     if isSpaceStr(token.rawSymbol):
         ret = retEnumSpace()
@@ -46,7 +46,7 @@ def retTokenAuto(token):
         ret = retEnumTab()
     else:
         ret = token.rawSymbol
-    return retCommonToken(ret)
+    return retCommonToken(ret, isEscape)
 def retCommonToken(nameObj, isEscape = False):
     return token(nameObj, isEscape)
 def retEnumSpace():
@@ -69,6 +69,11 @@ def isSpace(token):
     return isSapceEnum(token.key) or isSpaceStr(token.rawSymbol)
 def retSpace():
     return retCommonToken(retEnumSpace())
+def isEscapeToken(token):
+    return token.rawSymbol == keywords.common.value.escape.value or\
+    token.key == keywords.common.value.escape
+def isEscape(token):
+    return token.isEscape
 class token:    
     rawSymbol = ""
     key = None
@@ -117,6 +122,7 @@ class keywords(Enum):
         dollar = "$"
         pointer = "ptr"
         _import = "import"
+        escape = "\\"
     class brackets(Enum):
         __order__ = "quotes qurlyOpen qurlyClose squareOpen squreClose roundOpen roundClose trinagleOpen trinagleClose commentOpen commentClose"
         quotes = "\""
