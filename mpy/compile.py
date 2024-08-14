@@ -1,4 +1,4 @@
-from table import isEscape, isSpace, retTokenAuto, retCommonToken, isQuotes, isTab, retSpace
+from table import isEscape, isEscapeToken, isSpace, retTokenAuto, retCommonToken, isQuotes, isTab, retSpace
 
 class Parser():
     tokenized = []
@@ -7,6 +7,7 @@ class Parser():
     def Parse(self, text):
         self.origText = text
         self.parse_basic()
+        self.parse_escape()
         self.parse_one_symbols()
         self.parse_quotes()
         self.parse_swap_tabs()
@@ -21,31 +22,44 @@ class Parser():
             for i, symbol in enumerate(line):          
                 newTokens.append(retCommonToken(symbol, False))
         self.tokenized = newTokens
-    # parse single symbol if possible
+    # Parse escape symbol
+    def parse_escape(self):
+        prevSymbolIsEscape = False
+        prevTokens = self.tokenized
+        newTokens = []
+        for i, symbol in enumerate(prevTokens):
+            if isEscapeToken(symbol) and prevSymbolIsEscape == False:
+                prevSymbolIsEscape = not prevSymbolIsEscape
+                continue
+            else:
+                newTokens.append(retCommonToken(symbol, prevSymbolIsEscape))
+                prevSymbolIsEscape = False
+
+        self.tokenized = newTokens
+    # parse single symbol if possible  
     def parse_one_symbols(self):
         prevTokens = self.tokenized
         newTokens = []
-        self.tokenized = newTokens
         for i, symbol in enumerate(prevTokens):
-            newTokens.append(retTokenAuto(symbol))
+            newTokens.append(retTokenAuto(symbol, isEscape(symbol)))            
         self.tokenized = newTokens
     # Set quotes
-    def parse_quotes(self):        
+    def parse_quotes(self):
         quotes = False
         prevTokens = self.tokenized
         newTokens = []
-        for i, token in enumerate(prevTokens):                     
-            newTokens.append(retCommonToken(token, quotes))
+        prevSymbolQuotes = False
+        for i, token in enumerate(prevTokens):
+            if isEscape(token):
+                newTokens.append(retCommonToken(token, True))
+                continue
             if isQuotes(token):
-                quotes =  not quotes   
-        prevTokens = newTokens
-        newTokens = []
-        # Algorythm to escape only inner string of " "
-        for i, token in enumerate(prevTokens): 
+                quotes = not quotes
+            newTokens.append(retCommonToken(token, quotes and (prevSymbolQuotes == True)))
             if isQuotes(token):
-                quotes =  not quotes   
-            resQutes = token.isEscape
-            newTokens.append(retCommonToken(token, quotes and resQutes))            
+                prevSymbolQuotes = True
+            else:
+                prevSymbolQuotes = False
         self.tokenized = newTokens
     # Swap tabs with spaces
     def parse_swap_tabs(self):
@@ -53,7 +67,7 @@ class Parser():
         newTokens = []
         for token in prevTokens:
             if isTab(token):
-                if not isEscape(token):
+                if not isEscapeToken(token):
                     newTokens.append(retSpace())
                 else:
                     newTokens.append(token)
@@ -66,7 +80,7 @@ class Parser():
         prevTokens = self.tokenized
         newTokens = []
         for token in prevTokens:
-            if isSpace(token) and not isEscape(token):
+            if isSpace(token) and not isEscapeToken(token):
                 if not prevSpace:
                     newTokens.append(token)
                 prevSpace = True
@@ -78,6 +92,7 @@ class Parser():
         prevTokens = self.tokenized
         newTokens = []
         for token in prevTokens:
+            pass
             
 
 def test():
