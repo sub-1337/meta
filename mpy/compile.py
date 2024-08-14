@@ -74,7 +74,10 @@ class Parser():
                 prevSpace = False
                 newTokens.append(token)
         self.tokenized = newTokens
-
+    def parse_delete_comments(self):
+        prevTokens = self.tokenized
+        newTokens = []
+        for token in prevTokens:
             
 
 def test():
